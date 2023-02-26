@@ -48,6 +48,13 @@
     .user-form .formGroup {
         width: 100%;
     }
+    .product-full {
+        flex-direction: column;
+    }
+    .product-full .product-image {
+        width: 15em;
+        padding: 0.5em;
+    }
 }
 
 @media (max-width: 550px) {
