@@ -35,6 +35,7 @@ a:hover {
 
 input,
 button {
+    color: var(--base-color);
     background: transparent;
     text-transform: uppercase;
     border: 1px solid var(--base-color);
