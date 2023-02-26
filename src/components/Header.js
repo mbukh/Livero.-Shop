@@ -1,25 +1,53 @@
+import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 
-function Header() {
+function Header({ user, isAdmin, logOutUser }) {
     return (
         <header>
             <nav>
                 <Logo />
                 <ul>
                     <li>
-                        <a>Home</a>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                isActive ? "active" : undefined
+                            }
+                        >
+                            All products
+                        </NavLink>
                     </li>
-                    <li>
-                        <a>Categories</a>
-                    </li>
-                    <li>
-                        <a>All products</a>
-                    </li>
-                    <li>
-                        <a>
-                            <i className="icon add"></i>Add product
-                        </a>
-                    </li>
+                    {user && isAdmin && (
+                        <>
+                            <li>
+                                <NavLink
+                                    to="/product/add"
+                                    className={({ isActive }) =>
+                                        isActive ? "active" : undefined
+                                    }
+                                >
+                                    <i className="icon add"></i>Add product
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/logout" onClick={logOutUser}>
+                                    Logout
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
+                    {!user && (
+                        <li>
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) =>
+                                    isActive ? "active" : undefined
+                                }
+                            >
+                                Login
+                            </NavLink>
+                        </li>
+                    )}
                 </ul>
             </nav>
         </header>

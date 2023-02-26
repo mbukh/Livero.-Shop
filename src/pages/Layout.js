@@ -2,10 +2,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 
-const Layout = (props) => {
+const Layout = ({ user, isAdmin, logOutUser }) => {
     return (
         <>
-            <Header />
+            <Header user={user} isAdmin={isAdmin} logOutUser={logOutUser} />
             <main>
                 <div className="container">
                     <Outlet />

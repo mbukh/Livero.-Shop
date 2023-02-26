@@ -1,5 +1,5 @@
-import localApi from "./localApi.js";
-import remoteApi from "./remoteApi.js";
+import localApi from "./localApi";
+import remoteApi from "./remoteApi";
 
 const getCategories = async () => {
     return await remoteApi.getCategories();
@@ -13,7 +13,7 @@ const getProducts = async () => {
 };
 
 const getProductById = async (id) => {
-    const [localProduct] = localApi.getProductById(id);
+    const localProduct = localApi.getProductById(id);
     if (localProduct?.deleted) return null;
     if (localProduct) return localProduct;
     else return await remoteApi.getProductById(id);
@@ -27,15 +27,19 @@ const getProductsByCategory = async (category) => {
 };
 
 const addProduct = async (productData) => {
-    const newProduct = await remoteApi.addProduct(productData);
-    if (!newProduct?.id) return null;
+    const newRemoteProduct = await remoteApi.addProduct(productData);
+    if (!newRemoteProduct?.id) return null;
+    const lastLocalId =
+        localApi.getProducts().sort((a, b) => b.id - a.id)[0]?.id || 0;
+    const newId = Math.max(newRemoteProduct.id, lastLocalId + 1);
+    const newProduct = { ...newRemoteProduct, id: newId };
     localApi.addProduct(newProduct);
     return newProduct;
 };
 
 const deleteProduct = async (id) => {
     const remoteProduct = await remoteApi.deleteProduct(id);
-    const [localProduct] = localApi.getProductById(id);
+    const localProduct = localApi.getProductById(id);
     if (!remoteProduct && !localProduct) return null;
     else if (!remoteProduct) localApi.removeProduct(id);
     localApi.addProduct({ id: remoteProduct.id, deleted: true });
@@ -43,13 +47,14 @@ const deleteProduct = async (id) => {
 
 const updateProduct = async (id, updates) => {
     const remoteProduct = await remoteApi.deleteProduct(id);
-    const [localProduct] = localApi.getProductById(id);
+    const localProduct = localApi.getProductById(id);
     if (!remoteProduct && !localProduct) return null;
-    else if (!remoteProduct) localApi.updateProduct(id, updates);
-    else localApi.addProduct({ id, ...updates });
+    else if (!remoteProduct)
+        localApi.updateProduct({ id, ...localProduct, ...updates });
+    else localApi.addProduct({ id, ...remoteProduct, ...updates });
 };
 
-export {
+const exp = {
     getProducts,
     addProduct,
     deleteProduct,
@@ -58,14 +63,15 @@ export {
     getProductsByCategory,
     getCategories,
 };
+export default exp;
 
 // ===== //
 // utils //
 // ===== //
-function combineProducts(remoteProducts, localProducts) {
+function combineProducts(remoteProducts = [], localProducts = []) {
     const filteredRemote = remoteProducts.filter(
         (remoteProduct) =>
-            !localProducts.some(
+            !localProducts?.some(
                 (localProduct) => remoteProduct.id === localProduct.id
             )
     );

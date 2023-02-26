@@ -1,7 +1,9 @@
 import Error404 from "./Error404";
-import Home from "./Home";
+import Category from "./Category";
 import Layout from "./Layout";
 import Login from "./Login";
-import Category from "./Category";
+import Product from "./Product";
+import ProductForm from "./ProductForm";
+import Remove from "./Remove";
 
-export { Error404, Home, Layout, Login, Category };
+export { Error404, Category, Layout, Login, Product, ProductForm, Remove };

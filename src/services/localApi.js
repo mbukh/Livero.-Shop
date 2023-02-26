@@ -4,12 +4,12 @@ const getProducts = () => {
 
 const getProductById = (id) => {
     const products = JSON.parse(localStorage.getItem("products"));
-    return products.find((product) => product.id === id);
+    return products?.find((product) => product.id === Number(id));
 };
 
 const getProductsByCategory = (category) => {
     const products = JSON.parse(localStorage.getItem("products"));
-    return products.find((product) => product.category === category);
+    return products?.filter((product) => product.category === category);
 };
 
 const addProduct = (product) => {
@@ -32,7 +32,7 @@ const updateProduct = (id, updates) => {
     localStorage.setItem("products", JSON.stringify(products));
 };
 
-export {
+const exp = {
     getProducts,
     addProduct,
     deleteProduct,
@@ -40,3 +40,4 @@ export {
     getProductById,
     getProductsByCategory,
 };
+export default exp;

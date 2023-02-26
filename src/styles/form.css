@@ -1,0 +1,34 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.formGroup {
+    text-align: center;
+    width: 60%;
+    margin-inline: auto;
+}
+
+.formGroup input,
+.formGroup button {
+    width: 50%;
+}
+.formGroup button {
+    width: 30%;
+    cursor: pointer;
+}
+
+.formGroup button.secondary {
+    color: var(--warning-color);
+    width: 30%;
+}
+
+.formGroup textarea {
+    height: 5em;
+    width: 50%;
+}
+
+.form-errors {
+    color: var(--warning-color);
+}

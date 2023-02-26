@@ -78,7 +78,7 @@ const updateProduct = async (id, updates) => {
     }
 };
 
-export {
+const exp = {
     getProducts,
     addProduct,
     deleteProduct,
@@ -87,3 +87,4 @@ export {
     getProductsByCategory,
     getCategories,
 };
+export default exp;
