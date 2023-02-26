@@ -2,6 +2,9 @@
 
 This is a simple store app built with React that allows users to view and manage products and categories.
 
+| ![image](./docs/screen1.jpg) |
+| :--------------------------: |
+
 ## Functionality
 
 The app uses both a remote API and localStorage to store and update data. It provides CRUD (Create, Read, Update, Delete) functionality for products and categories.
@@ -19,6 +22,9 @@ The following routes are available:
 ## Design
 
 The app design was inspired by [this Behance project](https://www.behance.net/gallery/92212755/Livero-Minimalistic-design-for-online-furniture-store?tracking_source=search_projects%7Cminimalistic+online+shop). It uses the `normalize.css` and `reset-css` libraries for consistent styling.
+
+| ![image](./docs/screen2.jpg) |
+| :--------------------------: |
 
 ## Getting Started
 
@@ -43,6 +49,9 @@ The app relies on the following dependencies:
 -   `axios`: for making API requests
 -   `normalize.css`: for consistent styling
 -   `reset-css`: for consistent styling
+
+| ![image](./docs/screen3.jpg) |
+| :--------------------------: |
 
 ## API
 
