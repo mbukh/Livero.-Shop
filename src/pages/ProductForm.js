@@ -120,7 +120,7 @@ const ProductEdit = ({ user, isAdmin, setRecountProducts }) => {
                     <input
                         ref={priceRef}
                         type="text"
-                        name="password"
+                        name="price"
                         placeholder="price in USD"
                         defaultValue={product ? product.price : ""}
                     ></input>

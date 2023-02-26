@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+This is a simple store app built with React that allows users to view and manage products and categories.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Functionality
 
-## Available Scripts
+The app uses both a remote API and localStorage to store and update data. It provides CRUD (Create, Read, Update, Delete) functionality for products and categories.
 
-In the project directory, you can run:
+The following routes are available:
 
-### `npm start`
+-   `/`: displays all categories and products
+-   `/login`: allows users to log in
+-   `/category/:category`: displays products in the specified category
+-   `/product/add`: allows admins to add a new product
+-   `/product/:id`: displays details for a specific product
+-   `/product/:id/remove`: allows admins to remove a product
+-   `/product/:id/edit`: allows admins to edit a product
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app design was inspired by [this Behance project](https://www.behance.net/gallery/92212755/Livero-Minimalistic-design-for-online-furniture-store?tracking_source=search_projects%7Cminimalistic+online+shop). It uses the `normalize.css` and `reset-css` libraries for consistent styling.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To get started with the app, clone the repo and install dependencies:
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then start the app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Dependencies
 
-### `npm run eject`
+The app relies on the following dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-   `react`: for building the UI
+-   `react-router-dom`: for client-side routing
+-   `axios`: for making API requests
+-   `normalize.css`: for consistent styling
+-   `reset-css`: for consistent styling
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The app uses a remote API to get data and local API to update and remove data. The `api.js` file handles interactions with the API, as well as with localStorage.

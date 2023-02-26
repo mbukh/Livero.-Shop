@@ -1,6 +1,7 @@
 import "normalize.css";
 import "reset-css";
 import "./styles/App.css";
+import "./styles/Mobile.css";
 import {
     Error404,
     Layout,
