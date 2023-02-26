@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b43fc3d8-6b6a-466c-a69a-b0175d64e74f/deploy-status)](https://app.netlify.com/sites/mbukh-mini-crud-shop/deploys)
+
 This is a simple store app built with React that allows users to view and manage products and categories.
 
 ## Functionality
