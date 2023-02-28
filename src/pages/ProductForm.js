@@ -27,6 +27,7 @@ const ProductForm = ({ user, isAdmin, setRecountProducts }) => {
         if (params?.id) {
             const getProduct = async () => {
                 const product = await api.getProductById(params.id);
+                if (!product) navigate("/error404");
                 setProduct(product);
             };
             getProduct();
@@ -84,7 +85,7 @@ const ProductForm = ({ user, isAdmin, setRecountProducts }) => {
     };
 
     return user && isAdmin ? (
-        product || !params.id ? (
+        (params.id && product?.id) || !params.id ? (
             <form
                 className="user-form"
                 onSubmit={handleFormSubmit}

@@ -20,9 +20,10 @@ const addProduct = (product) => {
 
 const deleteProduct = (id) => {
     const products = JSON.parse(localStorage.getItem("products"));
-    const index = products.findIndex((product) => product.id === id);
-    products.splice(index, 1);
-    localStorage.setItem("products", JSON.stringify(products));
+    const updatedProducts = products.filter(
+        (product) => product.id !== Number(id)
+    );
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
 };
 
 const updateProduct = (id, updates) => {

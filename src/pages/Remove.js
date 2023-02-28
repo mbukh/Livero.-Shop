@@ -9,6 +9,7 @@ const Remove = ({ user, isAdmin, setRecountProducts }) => {
     const params = useParams();
 
     useEffect(() => {
+        if (removed) return;
         if (!user || !isAdmin) return;
         const fetchRemove = async () => {
             await api.deleteProduct(params.id);
@@ -17,7 +18,15 @@ const Remove = ({ user, isAdmin, setRecountProducts }) => {
             setTimeout(() => navigate("/"), 2000);
         };
         fetchRemove();
-    }, [user, isAdmin, setRemoved, params, setRecountProducts, navigate]);
+    }, [
+        removed,
+        user,
+        isAdmin,
+        setRemoved,
+        params,
+        setRecountProducts,
+        navigate,
+    ]);
 
     return user && isAdmin ? (
         removed ? (

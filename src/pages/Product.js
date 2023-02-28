@@ -1,20 +1,26 @@
 import "../styles/product.css";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Loading from "../components/Loading";
 
 const Product = ({ user, isAdmin }) => {
+    const navigate = useNavigate();
     const [product, setProduct] = useState();
     const params = useParams();
 
     useEffect(() => {
         const fetchProduct = async () => {
             const product = await api.getProductById(params.id);
+            console.log(product);
+            if (!product) {
+                navigate("/error404");
+                return;
+            }
             setProduct(product);
         };
         fetchProduct();
-    }, [params.id]);
+    }, [navigate, params.id]);
 
     return product ? (
         <div className="product-full">

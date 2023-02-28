@@ -46,7 +46,7 @@ const deleteProduct = async (id) => {
     const remoteProduct = await remoteApi.deleteProduct(id);
     const localProduct = localApi.getProductById(id);
     if (!remoteProduct && !localProduct) return null;
-    else if (!remoteProduct) localApi.removeProduct(id);
+    else if (!remoteProduct) localApi.deleteProduct(id);
     localApi.addProduct({ id: remoteProduct.id, deleted: true });
 };
 
@@ -79,7 +79,7 @@ export default exp;
 function combineProducts(
     remoteProducts = [],
     localProducts = [],
-    allLocalProducts = []
+    allLocalProducts = localProducts
 ) {
     const filteredRemote = remoteProducts.filter(
         (remoteProduct) =>
