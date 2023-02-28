@@ -6,9 +6,9 @@ const getCategories = async () => {
 };
 
 const getProducts = async () => {
-    const remoteProduct = await remoteApi.getProducts();
-    const localProduct = localApi.getProducts();
-    const allProducts = combineProducts(remoteProduct, localProduct);
+    const remoteProducts = await remoteApi.getProducts();
+    const localProducts = localApi.getProducts();
+    const allProducts = combineProducts(remoteProducts, localProducts);
     return filterRemovedProducts(allProducts);
 };
 
@@ -20,9 +20,14 @@ const getProductById = async (id) => {
 };
 
 const getProductsByCategory = async (category) => {
-    const remoteProduct = await remoteApi.getProductsByCategory(category);
-    const localProduct = localApi.getProductsByCategory(category);
-    const allProducts = combineProducts(remoteProduct, localProduct);
+    const remoteProducts = await remoteApi.getProductsByCategory(category);
+    const localProducts = localApi.getProductsByCategory(category);
+    const allLocalProducts = localApi.getProducts();
+    const allProducts = combineProducts(
+        remoteProducts,
+        localProducts,
+        allLocalProducts
+    );
     return filterRemovedProducts(allProducts);
 };
 
@@ -49,9 +54,12 @@ const updateProduct = async (id, updates) => {
     const remoteProduct = await remoteApi.deleteProduct(id);
     const localProduct = localApi.getProductById(id);
     if (!remoteProduct && !localProduct) return null;
-    else if (!remoteProduct)
+    else if (!remoteProduct) {
         localApi.updateProduct({ id, ...localProduct, ...updates });
-    else localApi.addProduct({ id, ...remoteProduct, ...updates });
+    } else {
+        localApi.addProduct({ id, ...remoteProduct, ...updates });
+    }
+    return getProductById(id);
 };
 
 const exp = {
@@ -68,14 +76,18 @@ export default exp;
 // ===== //
 // utils //
 // ===== //
-function combineProducts(remoteProducts = [], localProducts = []) {
+function combineProducts(
+    remoteProducts = [],
+    localProducts = [],
+    allLocalProducts = []
+) {
     const filteredRemote = remoteProducts.filter(
         (remoteProduct) =>
-            !localProducts?.some(
+            !allLocalProducts?.some(
                 (localProduct) => remoteProduct.id === localProduct.id
             )
     );
-    return [...filteredRemote, ...localProducts];
+    return [...filteredRemote, ...localProducts].sort((a, b) => a.id - b.id);
 }
 
 function filterRemovedProducts(products) {

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import api from "../services/api";
 import Loading from "../components/Loading";
 
-const ProductEdit = ({ user, isAdmin, setRecountProducts }) => {
+const ProductForm = ({ user, isAdmin, setRecountProducts }) => {
     const params = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState();
@@ -63,14 +63,18 @@ const ProductEdit = ({ user, isAdmin, setRecountProducts }) => {
             return;
         }
 
-        const uploadProduct = async () =>
-            await api.addProduct({
+        const uploadProduct = async () => {
+            const productData = {
                 title: titleRef.current.value,
                 price: priceRef.current.value,
                 description: descriptionRef.current.value,
                 image: imageRef.current.value,
                 category: categoryRef.current.value,
-            });
+            };
+            return product?.id
+                ? await api.updateProduct(product.id, productData)
+                : await api.addProduct(productData);
+        };
 
         const newProduct = await uploadProduct();
         if (newProduct) {
@@ -173,4 +177,4 @@ const ProductEdit = ({ user, isAdmin, setRecountProducts }) => {
     );
 };
 
-export default ProductEdit;
+export default ProductForm;
