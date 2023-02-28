@@ -39,7 +39,7 @@ const ProductForm = ({ user, isAdmin, setRecountProducts }) => {
                 .querySelector("select")
                 ?.options[0].setAttribute("selected", true);
         }
-    }, [params]);
+    }, [navigate, params]);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
