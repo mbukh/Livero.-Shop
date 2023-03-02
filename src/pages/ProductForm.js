@@ -7,16 +7,16 @@ import Loading from "../components/Loading";
 const ProductForm = ({ user, isAdmin, setRecountProducts }) => {
     const params = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState();
-    const [categories, setCategories] = useState();
+    const [product, setProduct] = useState({});
+    const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState("");
 
-    const formRef = useRef("");
-    const titleRef = useRef("");
-    const priceRef = useRef("");
-    const descriptionRef = useRef("");
-    const imageRef = useRef("");
-    const categoryRef = useRef("");
+    const formRef = useRef(null);
+    const titleRef = useRef(null);
+    const priceRef = useRef(null);
+    const descriptionRef = useRef(null);
+    const imageRef = useRef(null);
+    const categoryRef = useRef(null);
 
     useEffect(() => {
         const getCategories = async () => {
