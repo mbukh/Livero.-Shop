@@ -30,13 +30,13 @@ The app design was inspired by [this Behance project](https://www.behance.net/ga
 
 To get started with the app, clone the repo and install dependencies:
 
-```bash
+```sh
 npm install
 ```
 
 Then start the app:
 
-```bash
+```sh
 npm start
 ```
 
